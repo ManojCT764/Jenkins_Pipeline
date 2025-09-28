@@ -23,6 +23,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:20-alpine'
+                    args '-u root:root' //run the container as root user to avoid permission issues
                     reuseNode true  //reuse the same container for next subsequent stages
                 }
             }
@@ -44,6 +45,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:20-alpine'
+                    args '-u root:root' //run the container as root user to avoid permission issues
                     reuseNode true  //reuse the same container for next subsequent stages
                 }
             }
@@ -56,14 +58,11 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-                // Add your deployment steps here
-            }
 
             agent {
                 docker {
                     image 'node:20-alpine'
+                    args '-u root:root' //run the container as root user to avoid permission issues
                     reuseNode true  //reuse the same container for next subsequent stages
                 }
             }
