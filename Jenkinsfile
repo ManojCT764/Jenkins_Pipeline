@@ -54,5 +54,25 @@ pipeline {
                 '''
             }
         }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                // Add your deployment steps here
+            }
+
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true  //reuse the same container for next subsequent stages
+                }
+            }
+
+            steps {
+                sh '''
+                    npm install -g vercel
+                '''
+            }
+        }
     }
 }
