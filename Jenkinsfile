@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        my_var = 'Hello, Jenkins!'
+        VERCEL-TOKEN = credentials('REACT_JENKINS_PIPELINE')
+    }
     options {
         skipDefaultCheckout() //skip the default checkout of source code
         timestamps() //add timestamps to the console output
@@ -70,7 +74,11 @@ pipeline {
             steps {
                 sh '''
                     npm install -g vercel
+                    echo $my_var
+                    vercel --prod --token=$VERCEL-TOKEN --confirm --name=jenkins-pipeline
                 '''
+                // REACT_JENKINS_PIPELINE
+                // VIQxtXagVddlBACUrlnwvryD
             }
         }
     }
