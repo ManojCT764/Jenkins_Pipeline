@@ -49,10 +49,12 @@ pipeline {
             }
 
             steps {
-                sh '''
-                    ls -l
-                    npm test --cache=${PWD}/.npm-cache
-                '''
+
+                sh npm run test
+                // sh '''
+                //     ls -l
+                //     npm test --cache=${PWD}/.npm-cache
+                // '''
             }
         }
     }
