@@ -14,7 +14,7 @@ pipeline {
                     ls -l
                     node -v
                     npm -v
-                    npm config set cache ${PWD}/.npm-cache
+                    mkdir -p ${PWD}/.npm-cache
                     npm install --cache=${PWD}/.npm-cache
                     npm run build --cache=${PWD}/.npm-cache
                     ls -l
