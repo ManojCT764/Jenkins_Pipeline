@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+
+        stage('cleanup') {
+            steps {
+                cleanWs() //clean up the workspace before doing anything
+            }
+        }
         stage ('Build') {
             agent {
                 docker {
@@ -9,23 +15,17 @@ pipeline {
                     reuseNode true  //reuse the same container for next subsequent stages
                 }
             }
+            
             steps {
-
-                step {
-                    cleanWs() //clean up the workspace before doing anything
-                }   
-
-                step {
-                    sh '''
-                        ls -l
-                        node -v
-                        npm -v
-                        mkdir -p ${PWD}/.npm-cache
-                        npm install --cache=${PWD}/.npm-cache
-                        npm run build --cache=${PWD}/.npm-cache
-                        ls -l
-                    '''
-                }
+                sh '''
+                    ls -l
+                    node -v
+                    npm -v
+                    mkdir -p ${PWD}/.npm-cache
+                    npm install --cache=${PWD}/.npm-cache
+                    npm run build --cache=${PWD}/.npm-cache
+                    ls -l
+                '''
             }
         }
     }
