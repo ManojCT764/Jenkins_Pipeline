@@ -11,11 +11,11 @@ pipeline {
             }
             steps {
 
-                step('Cleanup workspace') {
+                step {
                     cleanWs() //clean up the workspace before doing anything
                 }   
 
-                step('Build the project'){
+                step {
                     sh '''
                         ls -l
                         node -v
