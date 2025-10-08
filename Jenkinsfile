@@ -23,6 +23,12 @@ pipeline {
             }
         }
 
+        stage('Get approvals') {
+            steps{
+                input 'Should we deploy ?'
+            }
+        }
+
         stage ('Build') {
             agent {
                 docker {
