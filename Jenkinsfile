@@ -25,6 +25,8 @@ pipeline {
 
         stage('Get approvals') {
             steps{
+                // we acn also add a timeout to avoid waiting indefinitely
+                timeout(time: 1, unit: 'HOURS')
                 input 'Should we deploy ?'
             }
         }
